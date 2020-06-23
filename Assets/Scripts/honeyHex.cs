@@ -33,9 +33,14 @@ public class honeyHex : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D otherCollider)
     {
         GameObject otherObject = otherCollider.gameObject;
-         if (otherObject.GetComponent<Bee>())
+         if (otherObject.GetComponent<Bee>() && status >= 1)
          {
-             status += 1;
+            if (status <=5)
+                status += 1;
+            else if (status == 6)
+            {
+                status = 6;
+            }
          }
         
     }
