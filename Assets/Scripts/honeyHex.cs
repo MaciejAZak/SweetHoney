@@ -39,7 +39,7 @@ public class honeyHex : MonoBehaviour
                 status += 1;
             else if (status == 6)
             {
-                status = 6;
+                return;
             }
          }
         
