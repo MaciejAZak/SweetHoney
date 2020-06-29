@@ -22,3 +22,4 @@ ROADMAP:
   -add rain/tornados stopping bees from collecting honey
   -multiple types of hexes (better honey)
   -upgrade to stop beekeeper from collecting all honey
+  -upgrade that moves honey from one hex to another (allows to more rapidly gathering max honey in one hex ripe to be gathered)
