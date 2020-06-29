@@ -8,7 +8,7 @@ public class honeyHex : MonoBehaviour
     [SerializeField] public int status;
     SpriteRenderer MySprite;
     Animator MyAnimator;
-    [SerializeField] bool FullHoney = false;
+    [SerializeField] public bool FullHoney = false;
     [SerializeField] bool ActiveHex = false;
     [SerializeField] bool CurrentlyGatheringHoney = false;
     int gatheringTime = 1;
@@ -41,7 +41,7 @@ public class honeyHex : MonoBehaviour
         GameObject otherObject = otherCollider.gameObject;
          if (otherObject.GetComponent<Bee>() && status >= 1)
          {
-            AddHoneyToHex();
+            //AddHoneyToHex();
          }
         
     }

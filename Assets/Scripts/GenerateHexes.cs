@@ -7,8 +7,8 @@ public class GenerateHexes : MonoBehaviour
     public GameObject HexPrefab;
     public GameObject starterHex;
 
-    int height = 15;
-    int width = 5;
+    public int height = 15;
+    public int width = 5;
     float xOffset = 1.74f;
     float zOffset = 0.5f;
     Vector2 Map_offset =new Vector2(-4f,-3f);
@@ -46,4 +46,6 @@ public class GenerateHexes : MonoBehaviour
     {
         
     }
+
+
 }
