@@ -12,6 +12,7 @@ public class honeyHex : MonoBehaviour
     [SerializeField] bool ActiveHex = false;
     [SerializeField] bool CurrentlyGatheringHoney = false;
     int gatheringTime = 1;
+    int hexCost = 50;
 
     // Start is called before the first frame update
     void Start()
@@ -54,9 +55,13 @@ public class honeyHex : MonoBehaviour
                 CurrentlyGatheringHoney = true;
                 StartCoroutine(WaitToGatherHoney());
             }
-            else
+            else if (status >=1)
             {
                 AddHoneyToHex();
+            }
+            else if (status == 0)
+            {
+                BuildNewHex();
             }
         }
         else if (Input.GetMouseButtonDown(1) && ActiveHex)
@@ -94,7 +99,23 @@ public class honeyHex : MonoBehaviour
         }
     }
 
-IEnumerator WaitToGatherHoney()
+
+    public void BuildNewHex()
+    {
+        HoneyManager honeyManager = FindObjectOfType<HoneyManager>();
+        if(honeyManager.HoneyGathered >= hexCost)
+        {
+            honeyManager.AddHoneyToScore(-hexCost);
+            status += 1;
+        }
+        else
+        {
+            Debug.Log("Not enough honey");
+        }
+
+    }
+
+    IEnumerator WaitToGatherHoney()
     {
         Debug.Log("Started gathering honey...");
         GetComponentInChildren<SpriteRenderer>().color = Color.gray;
