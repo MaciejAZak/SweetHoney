@@ -11,6 +11,7 @@ public class honeyHex : MonoBehaviour
     [SerializeField] bool FullHoney = false;
     [SerializeField] bool ActiveHex = false;
     [SerializeField] bool CurrentlyGatheringHoney = false;
+    int gatheringTime = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -93,15 +94,16 @@ public class honeyHex : MonoBehaviour
         }
     }
 
-    IEnumerator WaitToGatherHoney()
+IEnumerator WaitToGatherHoney()
     {
         Debug.Log("Started gathering honey...");
-
-        yield return new WaitForSeconds(status - 1);
+        GetComponentInChildren<SpriteRenderer>().color = Color.gray;
+        yield return new WaitForSeconds(gatheringTime);
+        HoneyManager honeyManager = FindObjectOfType<HoneyManager>();
+        honeyManager.AddHoneyToScore(status - 1);
         status = 1;
         FullHoney = false;
         CurrentlyGatheringHoney = false;
-        HoneyManager honeyManager = FindObjectOfType<HoneyManager>();
-        honeyManager.AddHoneyToScore(5);
+        GetComponentInChildren<SpriteRenderer>().color = Color.white;
     }
 }
