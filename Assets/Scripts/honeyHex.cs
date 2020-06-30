@@ -86,7 +86,10 @@ public class honeyHex : MonoBehaviour
         if (status >=1)
         {
             if (status <= 4)
+            {
                 status += 1;
+            }
+
             else if (status == 5)
             {
                 status += 1;
