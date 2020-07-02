@@ -52,10 +52,12 @@ public class Bee : MonoBehaviour
     IEnumerator WaitToGatherNectar()
     {
         Debug.Log("Started gathering nectar");
+        GetComponent<AudioSource>().enabled = false;
         yield return new WaitForSeconds(CollectingTime);
         honeyOnBee = 1;
         FindMyNewHex();
         Debug.Log(myHex);
+        GetComponent<AudioSource>().enabled = true;
     }
 
     private void FindMyNewHex()
@@ -97,8 +99,11 @@ public class Bee : MonoBehaviour
 
     IEnumerator OffloadingNectarAtMyHex()
     {
+
+        GetComponent<AudioSource>().enabled = false;
         yield return new WaitForSeconds(CollectingTime);
-        
+        GetComponent<AudioSource>().enabled = true;
+
         if (myHex.GetComponent<honeyHex>().status < 5)
         {
             myHex.GetComponent<honeyHex>().status += 1;
