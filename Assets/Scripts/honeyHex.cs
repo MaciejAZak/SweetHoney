@@ -53,11 +53,12 @@ public class honeyHex : MonoBehaviour
             if (FullHoney == true && !CurrentlyGatheringHoney)
             {
                 CurrentlyGatheringHoney = true;
-                StartCoroutine(WaitToGatherHoney());
+                WaitToGatherHoney();
             }
             else if (status >=1)
             {
-                AddHoneyToHex();
+                //AddHoneyToHex();
+                //TODO: set bee to work on this hex
             }
             else if (status == 0)
             {
@@ -111,8 +112,8 @@ public class honeyHex : MonoBehaviour
         if (honeyManager.HoneyGathered >= hexCost)
         {
             honeyManager.AddHoneyToScore(-hexCost);
-            status += 1;
-            hexgenerator.ActiveHexes.Add(this.gameObject);
+            hexgenerator.ToBuildHexes.Add(this.gameObject);
+            this.GetComponentInChildren<SpriteRenderer>().color = Color.red;
         }
         else
         {
@@ -121,16 +122,39 @@ public class honeyHex : MonoBehaviour
 
     }
 
-    IEnumerator WaitToGatherHoney()
+    public void WaitToGatherHoney()
     {
         HoneyManager honeyManager = FindObjectOfType<HoneyManager>();
-        Debug.Log("Started gathering honey...");
+        GenerateHexes hexgenerator = FindObjectOfType<GenerateHexes>();
+        hexgenerator.ActiveHexes.Remove(this.gameObject);
+        hexgenerator.ToGatherHexes.Add(this.gameObject);
         GetComponentInChildren<SpriteRenderer>().color = Color.gray;
-        yield return new WaitForSeconds(gatheringTime);
-        honeyManager.AddHoneyToScore(status - 1);
+        // honeyManager.AddHoneyToScore(status - 1);
+        // status = 1;
+        // FullHoney = false;
+        // CurrentlyGatheringHoney = false;
+        // GetComponentInChildren<SpriteRenderer>().color = Color.white;
+    }
+
+    public void HexGathered()
+    {
+        HoneyManager honeyManager = FindObjectOfType<HoneyManager>();
+        GenerateHexes hexgenerator = FindObjectOfType<GenerateHexes>();
         status = 1;
+        hexgenerator.ToGatherHexes.Remove(this.gameObject);
+        hexgenerator.ActiveHexes.Add(this.gameObject);
         FullHoney = false;
         CurrentlyGatheringHoney = false;
         GetComponentInChildren<SpriteRenderer>().color = Color.white;
+    }
+
+    public void HexBuilt()
+    {
+
+        GenerateHexes hexgenerator = FindObjectOfType<GenerateHexes>();
+        status = 1;
+        hexgenerator.ToBuildHexes.Remove(this.gameObject);
+        hexgenerator.ActiveHexes.Add(this.gameObject);
+        this.GetComponentInChildren<SpriteRenderer>().color = Color.white;
     }
 }

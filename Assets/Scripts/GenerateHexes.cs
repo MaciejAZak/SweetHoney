@@ -7,6 +7,8 @@ public class GenerateHexes : MonoBehaviour
     public GameObject HexPrefab;
     public GameObject starterHex;
     public List<GameObject> ActiveHexes;
+    public List<GameObject> ToBuildHexes;
+    public List<GameObject> ToGatherHexes;
 
     public int height = 15;
     public int width = 5;
@@ -36,6 +38,8 @@ public class GenerateHexes : MonoBehaviour
         }
 
         ActiveHexes = new List<GameObject>();
+        ToBuildHexes = new List<GameObject>();
+        ToGatherHexes = new List<GameObject>();
 
         for (int z = 2; z <= 6; z++)
         {
