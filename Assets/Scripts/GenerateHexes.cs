@@ -6,6 +6,7 @@ public class GenerateHexes : MonoBehaviour
 {
     public GameObject HexPrefab;
     public GameObject starterHex;
+    public List<GameObject> ActiveHexes;
 
     public int height = 15;
     public int width = 5;
@@ -33,18 +34,23 @@ public class GenerateHexes : MonoBehaviour
 
             }
         }
+
+        ActiveHexes = new List<GameObject>();
+
         for (int z = 2; z <= 6; z++)
         {
             string starterHexName = "Hex_0_" + z;
+            ActiveHexes.Add(GameObject.Find(starterHexName));
             starterHex = GameObject.Find(starterHexName);
             starterHex.GetComponent<honeyHex>().status = 1;
-        }      
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
 

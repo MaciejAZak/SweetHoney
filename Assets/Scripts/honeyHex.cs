@@ -105,11 +105,14 @@ public class honeyHex : MonoBehaviour
 
     public void BuildNewHex()
     {
+
         HoneyManager honeyManager = FindObjectOfType<HoneyManager>();
-        if(honeyManager.HoneyGathered >= hexCost)
+        GenerateHexes hexgenerator = FindObjectOfType<GenerateHexes>();
+        if (honeyManager.HoneyGathered >= hexCost)
         {
             honeyManager.AddHoneyToScore(-hexCost);
             status += 1;
+            hexgenerator.ActiveHexes.Add(this.gameObject);
         }
         else
         {
@@ -120,10 +123,10 @@ public class honeyHex : MonoBehaviour
 
     IEnumerator WaitToGatherHoney()
     {
+        HoneyManager honeyManager = FindObjectOfType<HoneyManager>();
         Debug.Log("Started gathering honey...");
         GetComponentInChildren<SpriteRenderer>().color = Color.gray;
         yield return new WaitForSeconds(gatheringTime);
-        HoneyManager honeyManager = FindObjectOfType<HoneyManager>();
         honeyManager.AddHoneyToScore(status - 1);
         status = 1;
         FullHoney = false;

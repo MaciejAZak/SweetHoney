@@ -9,6 +9,7 @@ public class Bee : MonoBehaviour
     [SerializeField] int BeeSpeed = 10;
     [SerializeField] float CollectingTime = 3f;
     GameObject myHex;
+    GameObject myOldHex;
     string myHexName;
 
     // Start is called before the first frame update
@@ -62,13 +63,33 @@ public class Bee : MonoBehaviour
 
     private void FindMyNewHex()
     {
-        GenerateHexes Generator = FindObjectOfType<GenerateHexes>();
-        int xMax = Generator.GetComponent<GenerateHexes>().width;
-        int yMax = Generator.GetComponent<GenerateHexes>().height;
-        int x = Random.Range(0, xMax);
-        int y = Random.Range(0, yMax);
-        myHexName = "Hex_" + x + "_" + y;
-        myHex = GameObject.Find(myHexName);
+        GenerateHexes hexgenerator = FindObjectOfType<GenerateHexes>();
+        // Old solution selecting random hex:
+
+        //int xMax = hexgenerator.GetComponent<GenerateHexes>().width;
+        //int yMax = hexgenerator.GetComponent<GenerateHexes>().height;
+        //int x = Random.Range(0, xMax);
+        //int y = Random.Range(0, yMax);
+        //myHexName = "Hex_" + x + "_" + y;
+        //myHex = GameObject.Find(myHexName);
+        //Debug.Log(myHex.name);
+
+        // New solution selecting one of the active hexes:
+
+        if (myHex == null)
+        {
+            myHex = hexgenerator.ActiveHexes[Random.Range(0,hexgenerator.ActiveHexes.Count)];
+        }
+        else
+        {
+            myOldHex = myHex;
+            myHex = hexgenerator.ActiveHexes[Random.Range(0, hexgenerator.ActiveHexes.Count)];
+            if (myHex == myOldHex)
+            {
+                FindMyNewHex();
+            }
+        }
+        //Debug.Log(myHex.name);
     }
 
     private void GoToMyHex()
@@ -89,7 +110,7 @@ public class Bee : MonoBehaviour
             CollectNectar();
             Debug.Log(this.name + " is collecting nectar");
         }
-        else if (otherObject.name == myHexName && honeyOnBee == 1)
+        else if (otherObject.name == myHex.name && honeyOnBee == 1)
         {
             Debug.Log("I'm at my hex");
             StartCoroutine(OffloadingNectarAtMyHex());

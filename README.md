@@ -23,3 +23,4 @@ ROADMAP:
   -multiple types of hexes (better honey)
   -upgrade to stop beekeeper from collecting all honey
   -upgrade that moves honey from one hex to another (allows to more rapidly gathering max honey in one hex ripe to be gathered)
+  -count distance flown by your bees and sum it in the end of level (achievement: your bees flown more than XXX km.)
