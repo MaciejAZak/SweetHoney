@@ -40,7 +40,7 @@ public class BeeWorker : MonoBehaviour
         }
         else if (hexgenerator.ToGatherHexes.Count > 0)
         {
-            Debug.Log(hexgenerator.ToGatherHexes.Count);
+            //Debug.Log(hexgenerator.ToGatherHexes.Count);
             activity = "GoToHexToGather";
             GoToHexToGather();
         }

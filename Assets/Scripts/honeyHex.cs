@@ -185,7 +185,9 @@ public class honeyHex : MonoBehaviour
         // this method changes status of hexes that are unblocked
         if (status != 0)
         {
+            int honeyStolen = status - 1;
             status = 1;
+            FindObjectOfType<honeyStolenScript>().StealHoney(honeyStolen);
         }
     }
 

@@ -56,7 +56,7 @@ public class Bee : MonoBehaviour
         GetComponent<AudioSource>().enabled = false;
         yield return new WaitForSeconds(CollectingTime);
         honeyOnBee = 1;
-        FindMyNewHex();
+        FindMyNewHex(); //TODO: Problem when it randomize into same hex after gathering nectar, not offloading nectar;
         //Debug.Log(myHex);
         GetComponent<AudioSource>().enabled = true;
     }
@@ -99,7 +99,7 @@ public class Bee : MonoBehaviour
                 StartCoroutine(WaitBeforeFindNewHex());
             }
 
-            if (myHex == myOldHex)
+            if (myHex == myOldHex && myHex.GetComponent<honeyHex>().status == 6) //deactive if bee is coming from a flower (WaitToGatherNectar() )
             {
                 //FindMyNewHex();
                 //return; // will not search for new hex this frame because it can cause StackOverflowException
