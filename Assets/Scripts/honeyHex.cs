@@ -141,8 +141,12 @@ public class honeyHex : MonoBehaviour
         HoneyManager honeyManager = FindObjectOfType<HoneyManager>();
         GenerateHexes hexgenerator = FindObjectOfType<GenerateHexes>();
         status = 1;
-        hexgenerator.ToGatherHexes.Remove(this.gameObject);
-        hexgenerator.ActiveHexes.Add(this.gameObject);
+        hexgenerator.ToGatherHexes.Remove(this.gameObject);   
+        if (hexgenerator.ActiveHexes.Contains(this.gameObject)) {        }
+        else
+        {
+            hexgenerator.ActiveHexes.Add(this.gameObject);
+        }
         FullHoney = false;
         CurrentlyGatheringHoney = false;
         GetComponentInChildren<SpriteRenderer>().color = Color.white;
@@ -154,7 +158,11 @@ public class honeyHex : MonoBehaviour
         GenerateHexes hexgenerator = FindObjectOfType<GenerateHexes>();
         status = 1;
         hexgenerator.ToBuildHexes.Remove(this.gameObject);
-        hexgenerator.ActiveHexes.Add(this.gameObject);
+        if (hexgenerator.ActiveHexes.Contains(this.gameObject)) {        }
+        else
+        {
+            hexgenerator.ActiveHexes.Add(this.gameObject);
+        }
         this.GetComponentInChildren<SpriteRenderer>().color = Color.white;
     }
 }

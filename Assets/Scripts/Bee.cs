@@ -8,7 +8,7 @@ public class Bee : MonoBehaviour
     [SerializeField] int honeyOnBee = 0;
     [SerializeField] int BeeSpeed = 10;
     [SerializeField] float CollectingTime = 3f;
-    GameObject myHex;
+    [SerializeField] GameObject myHex;
     GameObject myOldHex;
     string myHexName;
 
@@ -52,12 +52,12 @@ public class Bee : MonoBehaviour
 
     IEnumerator WaitToGatherNectar()
     {
-        Debug.Log("Started gathering nectar");
+        //Debug.Log("Started gathering nectar");
         GetComponent<AudioSource>().enabled = false;
         yield return new WaitForSeconds(CollectingTime);
         honeyOnBee = 1;
         FindMyNewHex();
-        Debug.Log(myHex);
+        //Debug.Log(myHex);
         GetComponent<AudioSource>().enabled = true;
     }
 
@@ -78,15 +78,32 @@ public class Bee : MonoBehaviour
 
         if (myHex == null)
         {
-            myHex = hexgenerator.ActiveHexes[Random.Range(0,hexgenerator.ActiveHexes.Count)];
+            if (hexgenerator.ActiveHexes.Count != 0)
+            {
+                myHex = hexgenerator.ActiveHexes[Random.Range(0, hexgenerator.ActiveHexes.Count)];
+            }
+            else
+            {
+                StartCoroutine(WaitBeforeFindNewHex());
+            }
         }
         else
         {
             myOldHex = myHex;
-            myHex = hexgenerator.ActiveHexes[Random.Range(0, hexgenerator.ActiveHexes.Count)];
+            if (hexgenerator.ActiveHexes.Count != 0)
+            {
+                myHex = hexgenerator.ActiveHexes[Random.Range(0, hexgenerator.ActiveHexes.Count)];
+            }
+            else
+            {
+                StartCoroutine(WaitBeforeFindNewHex());
+            }
+
             if (myHex == myOldHex)
             {
-                FindMyNewHex();
+                //FindMyNewHex();
+                //return; // will not search for new hex this frame because it can cause StackOverflowException
+                StartCoroutine(OffloadingNectarAtMyHex());
             }
         }
         //Debug.Log(myHex.name);
@@ -108,13 +125,16 @@ public class Bee : MonoBehaviour
         if (otherObject.GetComponent<flower>() && honeyOnBee == 0)
         {
             CollectNectar();
-            Debug.Log(this.name + " is collecting nectar");
+            //Debug.Log(this.name + " is collecting nectar");
         }
-        else if (otherObject.name == myHex.name && honeyOnBee == 1)
+        else if (myHex != null)
         {
-            Debug.Log("I'm at my hex");
-            StartCoroutine(OffloadingNectarAtMyHex());
+            if (otherObject.name == myHex.name && honeyOnBee == 1)
+            {
+                //Debug.Log("I'm at my hex");
+                StartCoroutine(OffloadingNectarAtMyHex());
 
+            }
         }
     }
 
@@ -141,5 +161,11 @@ public class Bee : MonoBehaviour
             myHex.GetComponent<honeyHex>().FullHoney = true;
             FindMyNewHex();
         }
+    }
+
+    IEnumerator WaitBeforeFindNewHex()
+    {
+        yield return new WaitForSeconds(1f);
+        FindMyNewHex();
     }
 }
