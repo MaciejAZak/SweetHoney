@@ -103,7 +103,7 @@ public class Bee : MonoBehaviour
             {
                 //FindMyNewHex();
                 //return; // will not search for new hex this frame because it can cause StackOverflowException
-                StartCoroutine(OffloadingNectarAtMyHex());
+                StartCoroutine(WaitBeforeFindNewHex());
             }
         }
         //Debug.Log(myHex.name);

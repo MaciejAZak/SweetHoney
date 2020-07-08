@@ -19,6 +19,7 @@ public class honeyHex : MonoBehaviour
     {
         MySprite = GetComponentInChildren<SpriteRenderer>();
         MyAnimator = GetComponent<Animator>();
+        this.GetComponentInChildren<MeshRenderer>().sortingOrder = 100;
     }
 
     // Update is called once per frame
@@ -26,6 +27,19 @@ public class honeyHex : MonoBehaviour
     {
         FillHexWithHoney();
         HexClicked();
+        ShowCost();
+    }
+
+    void ShowCost()
+    {
+        if (status > 0)
+        {
+            this.GetComponentInChildren<MeshRenderer>().enabled = false;
+        }
+        else
+        {
+            this.GetComponentInChildren<TextMesh>().text = hexCost.ToString();
+        }
     }
 
     void FillHexWithHoney()
