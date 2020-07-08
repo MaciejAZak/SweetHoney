@@ -30,7 +30,7 @@ public class ListTBH : MonoBehaviour
         else
         {
             list = "To Build: ";
-            int len = hexgenerator.ToBuildHexes.Count; // count = 1   [0]
+            int len = hexgenerator.ToBuildHexes.Count; // count = 10   [0]
 
             for (int i = 0; i < len; i++)
             {

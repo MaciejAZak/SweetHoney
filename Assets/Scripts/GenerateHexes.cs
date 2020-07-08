@@ -46,6 +46,7 @@ public class GenerateHexes : MonoBehaviour
             string starterHexName = "Hex_0_" + z;
             ActiveHexes.Add(GameObject.Find(starterHexName));
             starterHex = GameObject.Find(starterHexName);
+            starterHex.GetComponentInChildren<SpriteRenderer>().color = Color.white;
             starterHex.GetComponent<honeyHex>().status = 1;
         }
 
