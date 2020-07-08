@@ -165,4 +165,14 @@ public class honeyHex : MonoBehaviour
         }
         this.GetComponentInChildren<SpriteRenderer>().color = Color.white;
     }
+
+    public void ResetHexStatus()
+    {
+        // this method changes status of hexes that are unblocked
+        if (status != 0)
+        {
+            status = 1;
+        }
+    }
+
 }
