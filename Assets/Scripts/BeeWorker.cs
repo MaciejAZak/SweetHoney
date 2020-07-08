@@ -108,7 +108,9 @@ public class BeeWorker : MonoBehaviour
 
     IEnumerator BuildHex()
     {
+        GetComponent<AudioSource>().enabled = false;
         yield return new WaitForSeconds(BuildingTime);
+        GetComponent<AudioSource>().enabled = true;
         myHex.GetComponent<honeyHex>().HexBuilt();
         myHex = null;
 
@@ -116,7 +118,9 @@ public class BeeWorker : MonoBehaviour
 
     IEnumerator GatherHex()
     {
+        GetComponent<AudioSource>().enabled = false;
         yield return new WaitForSeconds(CollectingTime);
+        GetComponent<AudioSource>().enabled = true;
         honeyOnBee = myHex.GetComponent<honeyHex>().status - 1;
         myHex.GetComponent<honeyHex>().HexGathered();
         myHex = null;
