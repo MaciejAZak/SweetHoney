@@ -17,7 +17,7 @@ public class MenuManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(menu.name);
+        //Debug.Log(menu.name);
         if (Input.GetKeyDown("escape") && menuActive == false)
         {
             menuActive = true;

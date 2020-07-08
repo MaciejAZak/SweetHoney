@@ -104,7 +104,7 @@ public class Bee : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D otherCollider)
     {
         GameObject otherObject = otherCollider.gameObject;
-        Debug.Log(otherObject);
+        //Debug.Log(otherObject);
         if (otherObject.GetComponent<flower>() && honeyOnBee == 0)
         {
             CollectNectar();

@@ -9,7 +9,7 @@ public class BeeWorker : MonoBehaviour
     [SerializeField] float CollectingTime = 3f;
     [SerializeField] float BuildingTime = 10f;
     GameObject myHex;
-    string activity;
+    [SerializeField] string activity;
 
     // Start is called before the first frame update
     void Start()
@@ -58,7 +58,10 @@ public class BeeWorker : MonoBehaviour
     public void GoToHexToBuild()
     {
         GenerateHexes hexgenerator = FindObjectOfType<GenerateHexes>();
-        myHex = hexgenerator.ToBuildHexes[Random.Range(0, hexgenerator.ToBuildHexes.Count)];
+        if (myHex == null)
+        {
+            myHex = hexgenerator.ToBuildHexes[Random.Range(0, hexgenerator.ToBuildHexes.Count)];
+        }
         var destiny = myHex;
         Vector2 destinyTransform = new Vector2(destiny.transform.position.x, destiny.transform.position.y);
         transform.position = Vector2.MoveTowards(transform.position, destinyTransform, BeeSpeed * Time.deltaTime);
@@ -67,7 +70,10 @@ public class BeeWorker : MonoBehaviour
     public void GoToHexToGather()
     {
         GenerateHexes hexgenerator = FindObjectOfType<GenerateHexes>();
-        myHex = hexgenerator.ToGatherHexes[Random.Range(0, hexgenerator.ToGatherHexes.Count)];
+        if (myHex == null)
+        {
+            myHex = hexgenerator.ToGatherHexes[Random.Range(0, hexgenerator.ToGatherHexes.Count)];
+        }
         var destiny = myHex;
         Vector2 destinyTransform = new Vector2(destiny.transform.position.x, destiny.transform.position.y);
         transform.position = Vector2.MoveTowards(transform.position, destinyTransform, BeeSpeed * Time.deltaTime);
@@ -77,19 +83,23 @@ public class BeeWorker : MonoBehaviour
     {
         GameObject otherObject = otherCollider.gameObject;
 
-        if (otherObject.name == myHex.name && activity == "GoToHexToBuild")
+        Debug.Log(otherObject.name);
+        if (myHex != null)
         {
-            Debug.Log("I'm at my hex");
-            StartCoroutine(BuildHex());
+            if (otherObject.name == myHex.name && activity == "GoToHexToBuild")
+            {
+                Debug.Log("I'm at my hex");
+                StartCoroutine(BuildHex());
+            }
+
+            else if (otherObject.name == myHex.name && activity == "GoToHexToGather")
+            {
+                Debug.Log("I'm at my hex");
+                StartCoroutine(GatherHex());
+            }
         }
 
-        else if (otherObject.name == myHex.name && activity == "GoToHexToGather")
-        {
-            Debug.Log("I'm at my hex");
-            StartCoroutine(GatherHex());
-        }
-
-        else if (otherObject.name == "Warehouse" && activity == "GoToWarehouse")
+        if (otherObject.name == "Warehouse" && activity == "GoToWarehouse")
         {
             Debug.Log("I'm in warehouse");
             OffloadHoneyToWarehouse();
@@ -100,6 +110,8 @@ public class BeeWorker : MonoBehaviour
     {
         yield return new WaitForSeconds(BuildingTime);
         myHex.GetComponent<honeyHex>().HexBuilt();
+        myHex = null;
+
     }
 
     IEnumerator GatherHex()
@@ -107,6 +119,7 @@ public class BeeWorker : MonoBehaviour
         yield return new WaitForSeconds(CollectingTime);
         honeyOnBee = myHex.GetComponent<honeyHex>().status - 1;
         myHex.GetComponent<honeyHex>().HexGathered();
+        myHex = null;
         
     }
 
