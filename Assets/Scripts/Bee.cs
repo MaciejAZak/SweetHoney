@@ -44,6 +44,34 @@ public class Bee : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, destinyTransform, BeeSpeed * Time.deltaTime);
         
     }
+    
+    private void GoToMyHex()
+    {
+        var destiny = myHex;
+        Vector2 destinypath = new Vector2(destiny.transform.position.x - this.transform.position.x, destiny.transform.position.y - this.transform.position.y);
+        //Debug.Log(this.name + " going to " + destiny.name + " " + destinypath);
+        Vector2 destinyTransform = new Vector2(destiny.transform.position.x, destiny.transform.position.y);
+        transform.position = Vector2.MoveTowards(transform.position, destinyTransform, BeeSpeed * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter2D(Collider2D otherCollider)
+    {
+        GameObject otherObject = otherCollider.gameObject;
+        //Debug.Log(otherObject);
+        if (otherObject.GetComponent<flower>() && honeyOnBee == 0)
+        {
+            CollectNectar();
+            //Debug.Log(this.name + " is collecting nectar");
+        }
+        else if (myHex != null)
+        {
+            if (otherObject.name == myHex.name && honeyOnBee == 1)
+            {
+                //Debug.Log("I'm at my hex");
+                StartCoroutine(OffloadingNectarAtMyHex());
+            }
+        }
+    }
 
     private void CollectNectar()
     {
@@ -78,7 +106,7 @@ public class Bee : MonoBehaviour
 
         if (myHex == null)
         {
-            if (hexgenerator.ActiveHexes.Count != 0)
+            if (hexgenerator.ActiveHexes.Count > 0)
             {
                 myHex = hexgenerator.ActiveHexes[Random.Range(0, hexgenerator.ActiveHexes.Count)];
             }
@@ -90,7 +118,7 @@ public class Bee : MonoBehaviour
         else
         {
             myOldHex = myHex;
-            if (hexgenerator.ActiveHexes.Count != 0)
+            if (hexgenerator.ActiveHexes.Count > 0)
             {
                 myHex = hexgenerator.ActiveHexes[Random.Range(0, hexgenerator.ActiveHexes.Count)];
             }
@@ -109,54 +137,24 @@ public class Bee : MonoBehaviour
         //Debug.Log(myHex.name);
     }
 
-    private void GoToMyHex()
-    {
-        var destiny = myHex;
-        Vector2 destinypath = new Vector2(destiny.transform.position.x - this.transform.position.x, destiny.transform.position.y - this.transform.position.y);
-        //Debug.Log(this.name + " going to " + destiny.name + " " + destinypath);
-        Vector2 destinyTransform = new Vector2(destiny.transform.position.x, destiny.transform.position.y);
-        transform.position = Vector2.MoveTowards(transform.position, destinyTransform, BeeSpeed * Time.deltaTime);
-    }
-
-    private void OnTriggerEnter2D(Collider2D otherCollider)
-    {
-        GameObject otherObject = otherCollider.gameObject;
-        //Debug.Log(otherObject);
-        if (otherObject.GetComponent<flower>() && honeyOnBee == 0)
-        {
-            CollectNectar();
-            //Debug.Log(this.name + " is collecting nectar");
-        }
-        else if (myHex != null)
-        {
-            if (otherObject.name == myHex.name && honeyOnBee == 1)
-            {
-                //Debug.Log("I'm at my hex");
-                StartCoroutine(OffloadingNectarAtMyHex());
-
-            }
-        }
-    }
-
     IEnumerator OffloadingNectarAtMyHex()
     {
-
         GetComponent<AudioSource>().enabled = false;
         yield return new WaitForSeconds(CollectingTime);
         GetComponent<AudioSource>().enabled = true;
 
         if (myHex.GetComponent<honeyHex>().status < 5)
         {
-            myHex.GetComponent<honeyHex>().status += 1;
+            myHex.GetComponent<honeyHex>().AddHoneyToHex(honeyOnBee);
             honeyOnBee = 0;
         }
         else if(myHex.GetComponent<honeyHex>().status == 5)
         {
-            myHex.GetComponent<honeyHex>().status += 1;
+            myHex.GetComponent<honeyHex>().AddHoneyToHex(honeyOnBee);
             myHex.GetComponent<honeyHex>().FullHoney = true;
             honeyOnBee = 0;
         }
-        else if (myHex.GetComponent<honeyHex>().status == 6)
+        else if (myHex.GetComponent<honeyHex>().status >= 6)
         {
             myHex.GetComponent<honeyHex>().FullHoney = true;
             FindMyNewHex();

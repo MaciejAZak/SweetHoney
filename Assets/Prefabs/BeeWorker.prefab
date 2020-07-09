@@ -180,6 +180,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b749bce00af2f924187d6690f8da361d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  honeyOnBee: 0
+  BeeSpeed: 15
+  CollectingTime: 3
+  BuildingTime: 10
+  activity: waiting
 --- !u!1 &4799350774346569524
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,7 +253,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1911851817
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1898c4626d6fa78439d2a43c5ba73464, type: 3}
   m_Color: {r: 0.8679245, g: 0.38546112, b: 0.20060521, a: 1}

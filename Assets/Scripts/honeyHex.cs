@@ -9,8 +9,6 @@ public class honeyHex : MonoBehaviour
     [SerializeField] public bool FullHoney = false;
     [SerializeField] bool ActiveHex = false;
     [SerializeField] bool CurrentlyGatheringHoney = false;
-    [SerializeField] bool BeeIsBuilding = false;
-    [SerializeField] bool BeeIsGathering = false;
 
     SpriteRenderer MySprite;
     Animator MyAnimator;
@@ -100,25 +98,9 @@ public class honeyHex : MonoBehaviour
         ActiveHex = false;
     }
 
-    public void AddHoneyToHex()
+    public void AddHoneyToHex(int honey)
     {
-        if (status >=1)
-        {
-            if (status <= 4)
-            {
-                status += 1;
-            }
-
-            else if (status == 5)
-            {
-                status += 1;
-                FullHoney = true;
-            }
-            else if (status == 6)
-            {
-                return;
-            }
-        }
+        status += honey;
     }
 
 
@@ -159,7 +141,7 @@ public class honeyHex : MonoBehaviour
         HoneyManager honeyManager = FindObjectOfType<HoneyManager>();
         GenerateHexes hexgenerator = FindObjectOfType<GenerateHexes>();
         status = 1;
-        hexgenerator.ToGatherHexes.Remove(this.gameObject);   
+        //hexgenerator.ToGatherHexes.Remove(this.gameObject);   
         if (hexgenerator.ActiveHexes.Contains(this.gameObject)) {        }
         else
         {
@@ -175,7 +157,7 @@ public class honeyHex : MonoBehaviour
 
         GenerateHexes hexgenerator = FindObjectOfType<GenerateHexes>();
         status = 1;
-        hexgenerator.ToBuildHexes.Remove(this.gameObject);
+        //hexgenerator.ToBuildHexes.Remove(this.gameObject);
         if (hexgenerator.ActiveHexes.Contains(this.gameObject)) {        }
         else
         {
@@ -193,6 +175,7 @@ public class honeyHex : MonoBehaviour
             status = 1;
             FullHoney = false;
             FindObjectOfType<honeyStolenScript>().StealHoney(honeyStolen);
+            this.GetComponentInChildren<SpriteRenderer>().color = Color.white;
         }
     }
 

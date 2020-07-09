@@ -9,7 +9,7 @@ public class BeeWorker : MonoBehaviour
     [SerializeField] float CollectingTime = 3f;
     [SerializeField] float BuildingTime = 10f;
     GameObject myHex;
-    [SerializeField] string activity;
+    [SerializeField] string activity = "waiting";
 
     // Start is called before the first frame update
     void Start()
@@ -25,26 +25,38 @@ public class BeeWorker : MonoBehaviour
 
     private void DesisionMaker()
     {
-        if (activity == null)
+        if (activity == "waiting")
         {
             GenerateHexes hexgenerator = FindObjectOfType<GenerateHexes>();
             if (honeyOnBee > 0)
             {
                 activity = "GoToWarehouse";
-                GoToWarehouse();
+                
             }
             else if (hexgenerator.ToBuildHexes.Count > 0)
             {
                 //Debug.Log("To build hexes not null" + hexgenerator.ToBuildHexes.Count);
                 activity = "GoToHexToBuild";
-                GoToHexToBuild();
+                
             }
             else if (hexgenerator.ToGatherHexes.Count > 0)
             {
                 //Debug.Log(hexgenerator.ToGatherHexes.Count);
                 activity = "GoToHexToGather";
-                GoToHexToGather();
+                
             }
+        }
+        else if (activity == "GoToWarehouse")
+        {
+            GoToWarehouse();
+        }
+        else if (activity == "GoToHexToBuild")
+        {
+            GoToHexToBuild();
+        }
+        else if (activity == "GoToHexToGather")
+        {
+            GoToHexToGather();
         }
     }
 
@@ -62,7 +74,15 @@ public class BeeWorker : MonoBehaviour
         GenerateHexes hexgenerator = FindObjectOfType<GenerateHexes>();
         if (myHex == null)
         {
-            myHex = hexgenerator.ToBuildHexes[Random.Range(0, hexgenerator.ToBuildHexes.Count)];
+            if (hexgenerator.ToBuildHexes.Count > 0)
+            {
+                myHex = hexgenerator.ToBuildHexes[Random.Range(0, hexgenerator.ToBuildHexes.Count)];
+                hexgenerator.ToBuildHexes.Remove(myHex);
+            }
+            else
+            {
+                activity = "waiting";
+            }
         }
         var destiny = myHex;
         Vector2 destinyTransform = new Vector2(destiny.transform.position.x, destiny.transform.position.y);
@@ -74,18 +94,29 @@ public class BeeWorker : MonoBehaviour
         GenerateHexes hexgenerator = FindObjectOfType<GenerateHexes>();
         if (myHex == null)
         {
-            myHex = hexgenerator.ToGatherHexes[Random.Range(0, hexgenerator.ToGatherHexes.Count)];
+            if (hexgenerator.ToGatherHexes.Count > 0)
+            {
+                myHex = hexgenerator.ToGatherHexes[Random.Range(0, hexgenerator.ToGatherHexes.Count)];
+                hexgenerator.ToGatherHexes.Remove(myHex);
+            }
+            else
+            {
+                activity = "waiting";
+            }
         }
         var destiny = myHex;
-        Vector2 destinyTransform = new Vector2(destiny.transform.position.x, destiny.transform.position.y);
-        transform.position = Vector2.MoveTowards(transform.position, destinyTransform, BeeSpeed * Time.deltaTime);
+        if (myHex != null)
+        {
+            Vector2 destinyTransform = new Vector2(destiny.transform.position.x, destiny.transform.position.y);
+            transform.position = Vector2.MoveTowards(transform.position, destinyTransform, BeeSpeed * Time.deltaTime);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D otherCollider)
     {
         GameObject otherObject = otherCollider.gameObject;
 
-        Debug.Log(otherObject.name);
+        //Debug.Log(otherObject.name);
         if (myHex != null)
         {
             if (otherObject.name == myHex.name && activity == "GoToHexToBuild")
@@ -115,7 +146,7 @@ public class BeeWorker : MonoBehaviour
         GetComponent<AudioSource>().enabled = true;
         myHex.GetComponent<honeyHex>().HexBuilt();
         myHex = null;
-        activity = null;
+        activity = "waiting";
 
     }
 
@@ -127,7 +158,7 @@ public class BeeWorker : MonoBehaviour
         honeyOnBee = myHex.GetComponent<honeyHex>().status - 1;
         myHex.GetComponent<honeyHex>().HexGathered();
         myHex = null;
-        activity = null;
+        activity = "waiting";
         
     }
 
@@ -136,7 +167,7 @@ public class BeeWorker : MonoBehaviour
         HoneyManager honeyManager = FindObjectOfType<HoneyManager>();
         honeyManager.AddHoneyToScore(honeyOnBee);
         honeyOnBee = 0;
-        activity = null;
+        activity = "waiting";
     }
 
 }

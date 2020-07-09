@@ -27,6 +27,7 @@ public class BeeKeeper : MonoBehaviour
         AudioSource.PlayClipAtPoint(BeeKeeperLaugh, FindObjectOfType<Camera>().transform.position);
         GenerateHexes hexBuilderObject = FindObjectOfType<GenerateHexes>(); // find HeXBuilder where hexes are generated
         List<GameObject> activeHexesList = hexBuilderObject.ActiveHexes; // find list of active hexes
+        List<GameObject> gatheredHexesList = hexBuilderObject.ToGatherHexes; // find list of active hexes
 
         int len = activeHexesList.Count; // count = 1   [0]
         
@@ -34,6 +35,18 @@ public class BeeKeeper : MonoBehaviour
         {
             activeHexesList[i].GetComponent<honeyHex>().ResetHexStatus();
         }
+        int len2 = gatheredHexesList.Count; // count = 1   [0]
+
+        for (int i = 0; i < len2 -1; i++)
+        {
+            gatheredHexesList[i].GetComponent<honeyHex>().ResetHexStatus();
+            gatheredHexesList.Remove(gatheredHexesList[i]);
+            activeHexesList.Add(gatheredHexesList[i]);
+            Debug.Log(i);
+            Debug.Log(gatheredHexesList.Count);
+            i -= 1;
+        }
+
     }
 
     public void TakeAwayHoney()
