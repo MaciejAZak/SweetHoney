@@ -34,7 +34,7 @@ public class BeeWorker : MonoBehaviour
         }
         else if (hexgenerator.ToBuildHexes.Count > 0)
         {
-            Debug.Log("To build hexes not null" + hexgenerator.ToBuildHexes.Count);
+            //Debug.Log("To build hexes not null" + hexgenerator.ToBuildHexes.Count);
             activity = "GoToHexToBuild";
             GoToHexToBuild();
         }

@@ -6,6 +6,7 @@ public class HoneyManager : MonoBehaviour
 {
 
     [SerializeField] public int HoneyGathered = 100;
+    int TotalHoneyGathered = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,7 @@ public class HoneyManager : MonoBehaviour
     public void AddHoneyToScore(int HoneyFromHex)
     {
         HoneyGathered += HoneyFromHex;
+        TotalHoneyGathered += HoneyFromHex; //Use for determining final score
 
     }
 

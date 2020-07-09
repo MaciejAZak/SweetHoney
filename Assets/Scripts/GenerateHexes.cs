@@ -19,6 +19,14 @@ public class GenerateHexes : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GenerateBoard();
+        SetInitialActiveHexes();
+    }
+
+
+
+    private void GenerateBoard()
+    {
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
@@ -36,11 +44,14 @@ public class GenerateHexes : MonoBehaviour
 
             }
         }
-
+        // Create lists
         ActiveHexes = new List<GameObject>();
         ToBuildHexes = new List<GameObject>();
         ToGatherHexes = new List<GameObject>();
+    }
 
+    private void SetInitialActiveHexes()
+    {
         for (int z = 2; z <= 6; z++)
         {
             string starterHexName = "Hex_0_" + z;
@@ -49,14 +60,6 @@ public class GenerateHexes : MonoBehaviour
             starterHex.GetComponentInChildren<SpriteRenderer>().color = Color.white;
             starterHex.GetComponent<honeyHex>().status = 1;
         }
-
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
 
 }

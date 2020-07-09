@@ -5,7 +5,7 @@ using UnityEngine;
 public class BeeKeeper : MonoBehaviour
 {
     [SerializeField] float BeeKeeperTime = 60f;
-    [SerializeField] public AudioClip BeeKeeperLaugh;
+    [SerializeField] AudioClip BeeKeeperLaugh;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +24,7 @@ public class BeeKeeper : MonoBehaviour
         Debug.Log("Start Time");
         yield return new WaitForSeconds(BeeKeeperTime);
         Debug.Log("Stop Time");
-        //AudioSource.PlayClipAtPoint(BeeKeeperLaugh, FindObjectOfType<Camera>().transform.position);
+        AudioSource.PlayClipAtPoint(BeeKeeperLaugh, FindObjectOfType<Camera>().transform.position);
         GenerateHexes hexBuilderObject = FindObjectOfType<GenerateHexes>(); // find HeXBuilder where hexes are generated
         List<GameObject> activeHexesList = hexBuilderObject.ActiveHexes; // find list of active hexes
 

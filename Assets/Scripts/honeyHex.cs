@@ -63,7 +63,7 @@ public class honeyHex : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && ActiveHex)
         {
-            Debug.Log(this.name + " was left clicked.");
+            //Debug.Log(this.name + " was left clicked.");
             if (FullHoney == true && !CurrentlyGatheringHoney)
             {
                 CurrentlyGatheringHoney = true;
@@ -187,6 +187,7 @@ public class honeyHex : MonoBehaviour
         {
             int honeyStolen = status - 1;
             status = 1;
+            FullHoney = false;
             FindObjectOfType<honeyStolenScript>().StealHoney(honeyStolen);
         }
     }
