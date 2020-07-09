@@ -37,16 +37,31 @@ public class BeeKeeper : MonoBehaviour
         }
         int len2 = gatheredHexesList.Count; // count = 1   [0]
 
-        for (int i = 0; i < len2 -1; i++)
+        for (int i = 0; i <= len2 -1; i++)
         {
+            Debug.Log("list count is: " + gatheredHexesList.Count);
+            Debug.Log("current i is: " + i);
             gatheredHexesList[i].GetComponent<honeyHex>().ResetHexStatus();
-            gatheredHexesList.Remove(gatheredHexesList[i]);
+            gatheredHexesList[i].GetComponent<honeyHex>().CurrentlyGatheringHoney = false;
             activeHexesList.Add(gatheredHexesList[i]);
-            Debug.Log(i);
-            Debug.Log(gatheredHexesList.Count);
+            gatheredHexesList.Remove(gatheredHexesList[i]);
             i -= 1;
         }
 
+
+       // for (int i = 0; i <= len2 - 1; i++)
+       // {
+       //     Debug.Log("list count is: " + gatheredHexesList.Count);
+       //     Debug.Log("current i is: " + i);
+       //     if (gatheredHexesList.Count > 0)
+       //     {
+       //         gatheredHexesList[i].GetComponent<honeyHex>().ResetHexStatus();
+       //         gatheredHexesList[i].GetComponent<honeyHex>().CurrentlyGatheringHoney = false;
+       //         activeHexesList.Add(gatheredHexesList[i]);
+       //         gatheredHexesList.Remove(gatheredHexesList[i]);
+       //     }
+       //     i -= 1;
+       // }
     }
 
     public void TakeAwayHoney()

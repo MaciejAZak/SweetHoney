@@ -8,7 +8,7 @@ public class honeyHex : MonoBehaviour
     [SerializeField] public int status;
     [SerializeField] public bool FullHoney = false;
     [SerializeField] bool ActiveHex = false;
-    [SerializeField] bool CurrentlyGatheringHoney = false;
+    [SerializeField] public bool CurrentlyGatheringHoney = false;
 
     SpriteRenderer MySprite;
     Animator MyAnimator;
