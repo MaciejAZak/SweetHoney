@@ -6,11 +6,15 @@ public class honeyHex : MonoBehaviour
 {
 
     [SerializeField] public int status;
-    SpriteRenderer MySprite;
-    Animator MyAnimator;
     [SerializeField] public bool FullHoney = false;
     [SerializeField] bool ActiveHex = false;
     [SerializeField] bool CurrentlyGatheringHoney = false;
+    [SerializeField] bool BeeIsBuilding = false;
+    [SerializeField] bool BeeIsGathering = false;
+
+    SpriteRenderer MySprite;
+    Animator MyAnimator;
+
     int gatheringTime = 1;
     int hexCost = 50;
 

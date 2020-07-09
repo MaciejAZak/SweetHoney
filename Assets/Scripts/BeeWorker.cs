@@ -20,29 +20,31 @@ public class BeeWorker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         DesisionMaker();
     }
 
     private void DesisionMaker()
     {
-        GenerateHexes hexgenerator = FindObjectOfType<GenerateHexes>();
-        if (honeyOnBee > 0)
+        if (activity == null)
         {
-            activity = "GoToWarehouse";
-            GoToWarehouse();
-        }
-        else if (hexgenerator.ToBuildHexes.Count > 0)
-        {
-            //Debug.Log("To build hexes not null" + hexgenerator.ToBuildHexes.Count);
-            activity = "GoToHexToBuild";
-            GoToHexToBuild();
-        }
-        else if (hexgenerator.ToGatherHexes.Count > 0)
-        {
-            //Debug.Log(hexgenerator.ToGatherHexes.Count);
-            activity = "GoToHexToGather";
-            GoToHexToGather();
+            GenerateHexes hexgenerator = FindObjectOfType<GenerateHexes>();
+            if (honeyOnBee > 0)
+            {
+                activity = "GoToWarehouse";
+                GoToWarehouse();
+            }
+            else if (hexgenerator.ToBuildHexes.Count > 0)
+            {
+                //Debug.Log("To build hexes not null" + hexgenerator.ToBuildHexes.Count);
+                activity = "GoToHexToBuild";
+                GoToHexToBuild();
+            }
+            else if (hexgenerator.ToGatherHexes.Count > 0)
+            {
+                //Debug.Log(hexgenerator.ToGatherHexes.Count);
+                activity = "GoToHexToGather";
+                GoToHexToGather();
+            }
         }
     }
 
@@ -113,6 +115,7 @@ public class BeeWorker : MonoBehaviour
         GetComponent<AudioSource>().enabled = true;
         myHex.GetComponent<honeyHex>().HexBuilt();
         myHex = null;
+        activity = null;
 
     }
 
@@ -124,6 +127,7 @@ public class BeeWorker : MonoBehaviour
         honeyOnBee = myHex.GetComponent<honeyHex>().status - 1;
         myHex.GetComponent<honeyHex>().HexGathered();
         myHex = null;
+        activity = null;
         
     }
 
@@ -132,6 +136,7 @@ public class BeeWorker : MonoBehaviour
         HoneyManager honeyManager = FindObjectOfType<HoneyManager>();
         honeyManager.AddHoneyToScore(honeyOnBee);
         honeyOnBee = 0;
+        activity = null;
     }
 
 }
