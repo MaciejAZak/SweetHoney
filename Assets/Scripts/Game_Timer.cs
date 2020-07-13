@@ -5,7 +5,7 @@ using UnityEngine;
 public class Game_Timer : MonoBehaviour
 {
 
-    float current_time = 0f;
+    public float current_time = 0f;
     string secondsString;
 
     // Start is called before the first frame update

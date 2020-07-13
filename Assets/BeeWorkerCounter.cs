@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BeeWorkerCounter : MonoBehaviour
 {
-    int numberOfBees;
+    public int numberOfBees;
     // Start is called before the first frame update
     void Start()
     {

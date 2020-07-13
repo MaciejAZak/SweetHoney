@@ -6,7 +6,7 @@ public class HoneyManager : MonoBehaviour
 {
 
     [SerializeField] public int HoneyGathered = 100;
-    int TotalHoneyGathered = 0;
+    public int TotalHoneyGathered = 0;
 
     // Start is called before the first frame update
     void Start()

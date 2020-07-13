@@ -121,20 +121,20 @@ public class BeeWorker : MonoBehaviour
         {
             if (otherObject.name == myHex.name && activity == "GoToHexToBuild")
             {
-                Debug.Log("I'm at my hex");
+                //Debug.Log("I'm at my hex");
                 StartCoroutine(BuildHex());
             }
 
             else if (otherObject.name == myHex.name && activity == "GoToHexToGather")
             {
-                Debug.Log("I'm at my hex");
+                //Debug.Log("I'm at my hex");
                 StartCoroutine(GatherHex());
             }
         }
 
         if (otherObject.name == "Warehouse" && activity == "GoToWarehouse")
         {
-            Debug.Log("I'm in warehouse");
+            //Debug.Log("I'm in warehouse");
             OffloadHoneyToWarehouse();
         }
     }
