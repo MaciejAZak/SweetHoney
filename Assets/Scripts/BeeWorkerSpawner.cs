@@ -16,6 +16,11 @@ public class BeeWorkerSpawner : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        this.GetComponentInChildren<TextMesh>().text = BeeCost.ToString();
+    }
+
     private void SpawnWorker()
     {
         HoneyManager honeyManager = FindObjectOfType<HoneyManager>();

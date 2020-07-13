@@ -18,7 +18,6 @@ public class Game_Timer : MonoBehaviour
     void Update()
     {
         current_time = current_time + Time.deltaTime;
-        Debug.Log(current_time);
         int seconds = (int)current_time % 60;
         if (seconds <= 9)
         {
