@@ -9,6 +9,7 @@ public class honeyHex : MonoBehaviour
     [SerializeField] public bool FullHoney = false;
     [SerializeField] bool ActiveHex = false;
     [SerializeField] public bool CurrentlyGatheringHoney = false;
+    [SerializeField] public bool Currentlybuilt = false;
 
     SpriteRenderer MySprite;
     Animator MyAnimator;
@@ -74,11 +75,11 @@ public class honeyHex : MonoBehaviour
             }
             else if (status >=1)
             {
-                //AddHoneyToHex();
                 //TODO: set bee to work on this hex
             }
-            else if (status == 0)
+            else if (status == 0 && !Currentlybuilt)
             {
+                Currentlybuilt = true;
                 BuildNewHex();
             }
         }
@@ -158,6 +159,7 @@ public class honeyHex : MonoBehaviour
 
         GenerateHexes hexgenerator = FindObjectOfType<GenerateHexes>();
         status = 1;
+        Currentlybuilt = false;
         //hexgenerator.ToBuildHexes.Remove(this.gameObject);
         if (hexgenerator.ActiveHexes.Contains(this.gameObject)) {        }
         else
