@@ -12,7 +12,12 @@ public class BeeWorkerSpawner : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            SpawnWorker();
+            MenuManager menuActive = FindObjectOfType<MenuManager>();
+            if (menuActive.menuActive == false)
+            {
+                SpawnWorker();
+            }
+
         }
     }
 
@@ -27,11 +32,19 @@ public class BeeWorkerSpawner : MonoBehaviour
         if (honeyManager.HoneyGathered >= BeeCost)
         {
             GameObject bee = FindObjectOfType<Bee>().gameObject;
-            honeyManager.AddHoneyToScore(-BeeCost);
-            GameObject BeeCopy = (GameObject)Instantiate(Bee, bee.transform.position, Quaternion.identity);
-            x += 1;
-            BeeCopy.name = "Bee_worker" + x;
-            Destroy(bee, 0f);
+            if (bee != null)
+            {
+                honeyManager.AddHoneyToScore(-BeeCost);
+                GameObject BeeCopy = (GameObject)Instantiate(Bee, bee.transform.position, Quaternion.identity);
+                x += 1;
+                BeeCopy.name = "Bee_worker" + x;
+                Destroy(bee, 0f);
+
+            }
+            else
+            {
+                return;
+            }
 
         }
         else

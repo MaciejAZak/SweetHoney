@@ -14,7 +14,11 @@ public class BeeSpawner : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            SpawnBee();
+            MenuManager menuActive = FindObjectOfType<MenuManager>();
+            if (menuActive.menuActive == false)
+            {
+                SpawnBee();
+            }
         }
     }
 
