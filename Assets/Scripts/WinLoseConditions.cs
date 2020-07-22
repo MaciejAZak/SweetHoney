@@ -9,6 +9,7 @@ public class WinLoseConditions : MonoBehaviour
     [SerializeField] int EndnumberOfBees = 30;
     [SerializeField] int EndHexes = 6;
     GameObject menuWin;
+    GameObject menuLose;
 
     bool menuActive = false;
     int TotalHoneyGathered;
@@ -35,6 +36,9 @@ public class WinLoseConditions : MonoBehaviour
         WinScreenScript Win = FindObjectOfType<WinScreenScript>();
         menuWin = Win.gameObject;
         menuWin.gameObject.SetActive(false);
+        LoseScreenScript Lose = FindObjectOfType<LoseScreenScript>();
+        menuLose = Lose.gameObject;
+        menuLose.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -69,9 +73,24 @@ public class WinLoseConditions : MonoBehaviour
     {
         if (BeekeeperScore >= EndBeeKeeperScore)
         {
-            
+
             // LOSE
-            Debug.Log("Lost");
+            menuLose.SetActive(true);
+            //Debug.Log("Lost");
+            GenerateHexes board = FindObjectOfType<GenerateHexes>();
+            board.HideCost();
+            HoneyGatheredScore = HoneyGathered * 10;
+            TotalHoneyGatheredScore = TotalHoneyGathered;
+            totalBeesScore = totalBees * 20;
+            ActiveHexesScore = ActiveHexes * 55;
+            BeekeeperMinusScore = -BeekeeperScore * 150;
+            timePassedMinusScore = -(int)timePassed * 2; ;
+
+            EndScore = HoneyGatheredScore + TotalHoneyGatheredScore + totalBeesScore + ActiveHexesScore + BeekeeperMinusScore + timePassedMinusScore - 1000;
+
+            ScoreText scoreText = FindObjectOfType<ScoreText>();
+            scoreText.GetComponent<TextMesh>().text = EndScore.ToString();
+
             Time.timeScale = 0f;
         }
         else
@@ -86,7 +105,9 @@ public class WinLoseConditions : MonoBehaviour
         {
 
             // WIN
-            Debug.Log("Win");
+            //Debug.Log("Win");
+            GenerateHexes board = FindObjectOfType<GenerateHexes>();
+            board.HideCost();
             HoneyGatheredScore = HoneyGathered * 10;
             TotalHoneyGatheredScore = TotalHoneyGathered;
             totalBeesScore = totalBees * 20;

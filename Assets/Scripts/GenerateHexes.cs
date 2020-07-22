@@ -15,6 +15,7 @@ public class GenerateHexes : MonoBehaviour
     float xOffset = 1.74f;
     float zOffset = 0.5f;
     Vector2 Map_offset =new Vector2(-4f,-3f);
+    bool hiddenCost = false;
 
     // Start is called before the first frame update
     void Start()
@@ -62,4 +63,14 @@ public class GenerateHexes : MonoBehaviour
         }
     }
 
+    public void HideCost()
+    {
+        
+        if (hiddenCost == false)
+        {
+            foreach (Transform child in transform)
+                GetComponentInChildren<MeshRenderer>().gameObject.SetActive(false);
+            hiddenCost = true;
+        }
+    }
 }

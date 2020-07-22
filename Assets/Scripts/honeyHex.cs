@@ -37,11 +37,21 @@ public class honeyHex : MonoBehaviour
     {
         if (status > 0)
         {
-            this.GetComponentInChildren<MeshRenderer>().enabled = false;
+            if (this.GetComponentInChildren<TextMesh>() != null)
+            {
+                this.GetComponentInChildren<MeshRenderer>().enabled = false;
+            }    
         }
         else
         {
-            this.GetComponentInChildren<TextMesh>().text = hexCost.ToString();
+            if (this.GetComponentInChildren<TextMesh>() != null)
+            {
+                this.GetComponentInChildren<TextMesh>().text = hexCost.ToString();
+            }
+            else
+            {
+                return;
+            }
         }
     }
 
@@ -79,7 +89,7 @@ public class honeyHex : MonoBehaviour
             }
             else if (status == 0 && !Currentlybuilt)
             {
-                Currentlybuilt = true;
+                
                 BuildNewHex();
             }
         }
@@ -114,6 +124,7 @@ public class honeyHex : MonoBehaviour
         if (honeyManager.HoneyGathered >= hexCost)
         {
             honeyManager.AddHoneyToScore(-hexCost);
+            Currentlybuilt = true;
             hexgenerator.ToBuildHexes.Add(this.gameObject);
             this.GetComponentInChildren<SpriteRenderer>().color = Color.red;
         }

@@ -52,6 +52,7 @@ MonoBehaviour:
   FullHoney: 0
   ActiveHex: 0
   CurrentlyGatheringHoney: 0
+  Currentlybuilt: 0
 --- !u!95 &3067746669752528988
 Animator:
   serializedVersion: 3
@@ -201,7 +202,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -7710437626982180822, guid: d76780bcf8bc1074b89580412734672e,
     type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.7647059}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8509804}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
