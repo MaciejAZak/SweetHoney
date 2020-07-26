@@ -34,7 +34,6 @@ public class GameSpeedManager : MonoBehaviour
             MenuManager menuActive = FindObjectOfType<MenuManager>();
             if (menuActive.menuActive == false)
             {
-                print(this);
                 if (this.name == "PauseButton")
                 {
                     Time.timeScale = 0f;

@@ -85,8 +85,11 @@ public class BeeWorker : MonoBehaviour
             }
         }
         var destiny = myHex;
-        Vector2 destinyTransform = new Vector2(destiny.transform.position.x, destiny.transform.position.y);
-        transform.position = Vector2.MoveTowards(transform.position, destinyTransform, BeeSpeed * Time.deltaTime);
+        if (destiny != null) //if added to get rid of nullreferenceexception - check if it doesnt cause any problems
+        {
+            Vector2 destinyTransform = new Vector2(destiny.transform.position.x, destiny.transform.position.y);
+            transform.position = Vector2.MoveTowards(transform.position, destinyTransform, BeeSpeed * Time.deltaTime);
+        }
     }
 
     public void GoToHexToGather()

@@ -323,18 +323,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6634289594553011427}
   m_PrefabAsset: {fileID: 0}
---- !u!225 &548167570
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 548167568}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!4 &628416654 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8213606578203286582, guid: 6da21219dec961543a2c97b7929aa434,
@@ -1802,20 +1790,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1695706394672724457, guid: b0877ed37c9139d4782971c5bcc6beb4,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6634289593230201506, guid: b0877ed37c9139d4782971c5bcc6beb4,
         type: 3}
       propertyPath: m_Name
       value: MenuScreen
-      objectReference: {fileID: 0}
-    - target: {fileID: 6634289593230201506, guid: b0877ed37c9139d4782971c5bcc6beb4,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6634289593230201510, guid: b0877ed37c9139d4782971c5bcc6beb4,
         type: 3}
@@ -1921,6 +1899,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8811991807563269807, guid: b0877ed37c9139d4782971c5bcc6beb4,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0877ed37c9139d4782971c5bcc6beb4, type: 3}

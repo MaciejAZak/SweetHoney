@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
@@ -40,6 +41,7 @@ public class MenuManager : MonoBehaviour
         menu.SetActive(true);
         menus.GetComponent<CanvasGroup>().alpha = 1;
         menus.GetComponent<CanvasGroup>().interactable = true;
+        menu.GetComponent<Image>().enabled = true;
     }
 
     public void DeactivateMenu()
@@ -48,5 +50,6 @@ public class MenuManager : MonoBehaviour
         menu.SetActive(true);
         menus.GetComponent<CanvasGroup>().alpha = 0;
         menus.GetComponent<CanvasGroup>().interactable = false;
+        menu.GetComponent<Image>().enabled = false;
     }
 }
