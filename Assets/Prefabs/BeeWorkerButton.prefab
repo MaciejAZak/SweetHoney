@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 730f4b35e6115b948aec233bba69b2a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BeeCost: 10
+  BeeCost: 5
   Bee: {fileID: 4799350774298171328, guid: 4e3e058e516fd124eb6b30d908c57126, type: 3}
   x: 0
 --- !u!1 &6049129219065578420
@@ -209,7 +209,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6049129219065578420}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.75, y: 2, z: 0}
+  m_LocalPosition: {x: 0.01, y: 1.48, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 9070201626526738578}
@@ -266,8 +266,8 @@ TextMesh:
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
-  m_Anchor: 0
-  m_Alignment: 0
+  m_Anchor: 4
+  m_Alignment: 1
   m_TabSize: 4
   m_FontSize: 100
   m_FontStyle: 0

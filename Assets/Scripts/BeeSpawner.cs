@@ -5,7 +5,7 @@ using UnityEngine;
 public class BeeSpawner : MonoBehaviour
 {
 
-    [SerializeField] public int BeeCost = 15;
+    [SerializeField] public int BeeCost = 10;
     [SerializeField] GameObject Bee;
     public Vector3 SpawnPlace = new Vector3(0f, 0f, 0f);
     public int x = 0;
