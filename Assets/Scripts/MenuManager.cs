@@ -13,7 +13,7 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         menu = GameObject.Find("MenuScreen");
-        menu.SetActive(true); // Must be set to false, even though it's always true after first use - it its true from the start it does not work.
+        menu.SetActive(false); // Must be set to false, even though it's always true after first use - it its true from the start it does not work.
         menus.GetComponent<CanvasGroup>().alpha = 0;
         menus.GetComponent<CanvasGroup>().interactable = false;
     }
