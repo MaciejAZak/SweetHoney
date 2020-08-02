@@ -75,7 +75,8 @@ public class honeyHex : MonoBehaviour
     private void HexClicked()
     {
         MenuManager menuActive = FindObjectOfType<MenuManager>();
-        if (Input.GetMouseButtonDown(0) && ActiveHex && menuActive.menuActive == false)
+        MenuScript Briefing = FindObjectOfType<MenuScript>();
+        if (Input.GetMouseButtonDown(0) && ActiveHex && menuActive.menuActive == false && Briefing.BriefingActive == false)
         {
             //Debug.Log(this.name + " was left clicked.");
             if (FullHoney == true && !CurrentlyGatheringHoney)

@@ -5,15 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class MenuScript : MonoBehaviour
 {
-    int currentSceneIndex;
+    public bool BriefingActive;
     private Wipage screenWipe;
     private MenuManager menumanager;
+    int currentSceneIndex;
+    GameObject briefing;
+
 
 
     private void Awake()
     {
         screenWipe = FindObjectOfType<Wipage>();
         menumanager = FindObjectOfType<MenuManager>();
+        BriefingActive = true;
     }
 
     public void LoadSettings()
@@ -23,13 +27,13 @@ public class MenuScript : MonoBehaviour
 
     public void LoadMainMenu()
     {
-        StartCoroutine(LoadMainMenuCorutine());
+        StartCoroutine(LoadMainMenuCoroutine());
     }
 
     public void RestartLevel()
     { 
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        StartCoroutine(RestartLevelCorutine());
+        StartCoroutine(RestartLevelCoroutine());
     }
 
     public void QuitGame()
@@ -38,7 +42,15 @@ public class MenuScript : MonoBehaviour
         Application.Quit();
     }
 
-    IEnumerator RestartLevelCorutine()
+    public void StartLevel()
+    {
+        briefing = GameObject.Find("Briefing");
+        briefing.SetActive(false);
+        BriefingActive = false;
+        Time.timeScale = 1f;
+    }
+
+    IEnumerator RestartLevelCoroutine()
     {
         screenWipe.ToggleWipe(true);
         Time.timeScale = 1f;
@@ -50,7 +62,7 @@ public class MenuScript : MonoBehaviour
         SceneManager.LoadScene(currentSceneIndex);
     }
 
-    IEnumerator LoadMainMenuCorutine()
+    IEnumerator LoadMainMenuCoroutine()
     {
         screenWipe.ToggleWipe(true);
         Time.timeScale = 1f;
@@ -61,4 +73,5 @@ public class MenuScript : MonoBehaviour
         }
         SceneManager.LoadScene("MainMenu");
     }
+
 }

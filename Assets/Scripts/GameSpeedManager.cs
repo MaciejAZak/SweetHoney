@@ -32,7 +32,8 @@ public class GameSpeedManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             MenuManager menuActive = FindObjectOfType<MenuManager>();
-            if (menuActive.menuActive == false)
+            MenuScript Briefing = FindObjectOfType<MenuScript>();
+            if (menuActive.menuActive == false && Briefing.BriefingActive == false)
             {
                 if (this.name == "PauseButton")
                 {

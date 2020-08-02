@@ -9,26 +9,36 @@ public class MenuManager : MonoBehaviour
 
     public bool menuActive = false;
     GameObject menu;
+    MenuScript Briefing;
 
     // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
         menu = GameObject.Find("MenuScreen");
-        menu.SetActive(false); // Must be set to false, even though it's always true after first use - it its true from the start it does not work.
+        menu.SetActive(false);
+    }
+
+    void Start()
+    {
+        menu.SetActive(true); // Must be set to false, even though it's always true after first use - it its true from the start it does not work.
         menus.GetComponent<CanvasGroup>().alpha = 0;
         menus.GetComponent<CanvasGroup>().interactable = false;
+        menu.GetComponent<Image>().enabled = false;
+        Time.timeScale = 0f;
+        Briefing = FindObjectOfType<MenuScript>();
     }
 
     // Update is called once per frame
     void Update()
     {
         //Debug.Log(menu.name);
-        if (Input.GetKeyDown("escape") && menuActive == false)
+        if (Input.GetKeyDown("escape") && menuActive == false && Briefing.BriefingActive == false)
         {
             ActivateMenu();
             Time.timeScale = 0;
         }
-        else if (Input.GetKeyDown("escape") && menuActive == true)
+        else if (Input.GetKeyDown("escape") && menuActive == true && Briefing.BriefingActive == false)
         {
             DeactivateMenu();
             Time.timeScale = 1;
