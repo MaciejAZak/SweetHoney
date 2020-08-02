@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class WinLoseConditions : MonoBehaviour
 {
-    [SerializeField] int EndBeeKeeperScore = 100;
-    [SerializeField] int EndHoneyGathered = 200;
-    [SerializeField] int EndnumberOfBees = 30;
-    [SerializeField] int EndHexes = 6;
+    [SerializeField] public int EndBeeKeeperScore = 100;
+    [SerializeField] public int EndHoneyGathered = 200;
+    [SerializeField] public int EndnumberOfBees = 30;
+    [SerializeField] public int EndHexes = 6;
     GameObject menuWin;
     GameObject menuLose;
 

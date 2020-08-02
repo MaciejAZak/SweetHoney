@@ -2,22 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class MenuScript : MonoBehaviour
 {
+    [SerializeField] GameObject BeeTaskToFillText;
+    [SerializeField] GameObject HexTaskToFillText;
+    [SerializeField] GameObject HoneyTaskToFillText;
+    [SerializeField] GameObject BeeKeeperTaskToFillText;
     public bool BriefingActive;
     private Wipage screenWipe;
     private MenuManager menumanager;
     int currentSceneIndex;
     GameObject briefing;
-
+    WinLoseConditions taskToFill;
 
 
     private void Awake()
     {
         screenWipe = FindObjectOfType<Wipage>();
         menumanager = FindObjectOfType<MenuManager>();
+        taskToFill = FindObjectOfType<WinLoseConditions>();
         BriefingActive = true;
+        BeeTaskToFillText.GetComponent<TextMeshProUGUI>().text = taskToFill.EndnumberOfBees.ToString();
+        HexTaskToFillText.GetComponent<TextMeshProUGUI>().text = taskToFill.EndHexes.ToString();
+        HoneyTaskToFillText.GetComponent<TextMeshProUGUI>().text = taskToFill.EndHoneyGathered.ToString();
+        BeeKeeperTaskToFillText.GetComponent<TextMeshProUGUI>().text = taskToFill.EndBeeKeeperScore.ToString();
     }
 
     public void LoadSettings()
