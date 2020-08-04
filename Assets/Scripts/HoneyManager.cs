@@ -23,8 +23,10 @@ public class HoneyManager : MonoBehaviour
     public void AddHoneyToScore(int HoneyFromHex)
     {
         HoneyGathered += HoneyFromHex;
-        TotalHoneyGathered += HoneyFromHex; //Use for determining final score
-
+        if (HoneyFromHex > 0)
+        {
+            TotalHoneyGathered += HoneyFromHex; //Use for determining final score
+        }
     }
 
     private void UpdateHoneyCount()
