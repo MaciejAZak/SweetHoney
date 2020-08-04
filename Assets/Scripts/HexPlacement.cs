@@ -14,7 +14,8 @@ public class HexPlacement : MonoBehaviour
         Vector3 snapPos;
         if (X % 2 == 0)
         {
-            snapPos.x = X * 1.74f;
+            //snapPos.x = X * 1.74f;
+            snapPos.x = X * 0.87f;
             snapPos.y = Y;
         }
         else
