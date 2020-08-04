@@ -82,8 +82,8 @@ public class WinLoseConditions : MonoBehaviour
             HoneyGatheredScore = HoneyGathered * 10;
             TotalHoneyGatheredScore = TotalHoneyGathered;
             totalBeesScore = totalBees * 20;
-            ActiveHexesScore = ActiveHexes * 55;
-            BeekeeperMinusScore = -BeekeeperScore * 150;
+            ActiveHexesScore = ActiveHexes * 125;
+            BeekeeperMinusScore = -BeekeeperScore * 50;
             timePassedMinusScore = -(int)timePassed * 2; ;
 
             EndScore = HoneyGatheredScore + TotalHoneyGatheredScore + totalBeesScore + ActiveHexesScore + BeekeeperMinusScore + timePassedMinusScore - 1000;
@@ -122,6 +122,18 @@ public class WinLoseConditions : MonoBehaviour
             ScoreText scoreText = FindObjectOfType<ScoreText>();
             scoreText.GetComponent<TextMesh>().text = EndScore.ToString();
 
+            HexScoreNumber hexScoreNumber = FindObjectOfType<HexScoreNumber>();
+            hexScoreNumber.GetComponent<TextMesh>().text = ActiveHexesScore.ToString();
+            HoneyScoreNumber honeyScoreNumber = FindObjectOfType<HoneyScoreNumber>();
+            honeyScoreNumber.GetComponent<TextMesh>().text = HoneyGatheredScore.ToString();
+            BeeScoreNumber beeScoreNumber = FindObjectOfType<BeeScoreNumber>();
+            beeScoreNumber.GetComponent<TextMesh>().text = totalBeesScore.ToString();
+            TotalHoneyScoreNumber totalHoneyScoreNumber = FindObjectOfType<TotalHoneyScoreNumber>();
+            totalHoneyScoreNumber.GetComponent<TextMesh>().text = TotalHoneyGatheredScore.ToString();
+            BeeKeeperScoreNumber beeKeeperScoreNumber = FindObjectOfType<BeeKeeperScoreNumber>();
+            beeKeeperScoreNumber.GetComponent<TextMesh>().text = BeekeeperMinusScore.ToString();
+            TimerScoreNumber timerScoreNumber = FindObjectOfType<TimerScoreNumber>();
+            timerScoreNumber.GetComponent<TextMesh>().text = timePassedMinusScore.ToString();
 
             Time.timeScale = 0f;
         }
